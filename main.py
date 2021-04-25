@@ -1,5 +1,5 @@
 from BankAccount import bank
-
+print('hi')
 if __name__ == '__main__':
 
         x = bank.Bank()
