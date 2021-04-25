@@ -16,7 +16,7 @@ class Account:
     def deposit(self,money):     
         print(money,'원이 입금되었습니다.')
         self.__user_balance += money 
-        print("잔액:",self.__user_balance)
+        print("잔액:",self.__user_balance,"원")
 
     def withdraw(self,money):
         if self.__user_balance < money:
@@ -24,7 +24,7 @@ class Account:
         else:
             print(money,"원이 출금되었습니다.")
             self.__user_balance -= money
-            print("잔액:",self.__user_balance)
+            print("잔액:",self.__user_balance,"원")
             
 class Bank:
     def __init__(self):
@@ -38,23 +38,34 @@ class Bank:
         self.accountlist.append(Account(user_id,user_name,user_balance))
       
     def deposit(self):
-        user_id = input("입금하실 계좌번호를 입력해주세요: ")
+        deposit_id = input("입금하실 계좌번호를 입력해주세요: ")
         for i in range(len(self.accountlist)):
-            if self.accountlist[i].get_UserId() == user_id:
+            if self.accountlist[i].get_UserId() == deposit_id:
                 self.accountlist[i].deposit(int(input("입금하실 금액을 입력해주세요: ")))
                 break
             else:
                 print("계좌를 찾을수 없습니다.")
+                break
                 
     def withdraw(self): 
-        user_id = input("출금하실 계좌번호를 입력해주세요: ")   
+        withdraw_id = input("출금하실 계좌번호를 입력해주세요: ")   
         for i in range(len(self.accountlist)):
-            if self.accountlist[i].get_UserId() == user_id:
+            if self.accountlist[i].get_UserId() == withdraw_id:
                 self.accountlist[i].withdraw(int(input("출금하실 금액을 입력해주세요: ")))
                 break
             else:
-                print("존재하지 않는 계좌입니다.")
+                print("계좌를 찾을수 없습니다.")
+                break
                 
     def show_all(self):
         for i in range(len(self.accountlist)):
             print("계좌번호:",self.accountlist[i].get_UserId(),"/ 이름:",self.accountlist[i].get_UserName(),"/ 잔액:",self.accountlist[i].get_UserBalance())
+
+    def delete_account(self):
+        del_id = input("삭제하실 계좌번호를 입력해주세요: ")
+        for i in range(len(self.accountlist)):
+            if self.accountlist[i].get_UserId() == del_id:
+                del self.accountlist[i]
+            else:
+                print("계좌를 찾을수 없습니다.")
+                break
